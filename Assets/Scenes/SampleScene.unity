@@ -343,7 +343,7 @@ MonoBehaviour:
   cubeSnow: {fileID: 8529553779658637797, guid: dd5ce7a283a32d846ae040dd3ab9a789, type: 3}
   width: 150
   large: 150
-  height: 3
+  height: 15
   seed: 2
   detail: 30
 --- !u!4 &1943766226
