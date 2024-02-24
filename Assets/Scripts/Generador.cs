@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Generador : MonoBehaviour
 {
-    public GameObject cube;
+    public GameObject cubeDirt, cubeGrass, cubeSnow;
     public int width, large, height;
     public int seed;
     public float detail;
+    private int maxHeight = 24;
 
     void Start()
     {
@@ -21,9 +22,23 @@ public class Generador : MonoBehaviour
             for (int z = 0; z < large; z++)
             {
                 height = (int)(Mathf.PerlinNoise((x / 2 + seed) / detail, (z / 2 + seed) / detail) * detail);
+                int heightEdgeDirt = maxHeight / 3;
+                int heightEdgeGrass = (maxHeight / 3) * 2;
+
                 for (int y = 0; y < height; y++)
                 {
-                    Instantiate(cube, new Vector3(x, y, z), Quaternion.identity);
+                    if (y <= heightEdgeDirt)
+                    {
+                        Instantiate(cubeDirt, new Vector3(x, y, z), Quaternion.identity);
+                    }
+                    else if (y > heightEdgeDirt && y <= heightEdgeGrass)
+                    {
+                        Instantiate(cubeGrass, new Vector3(x, y, z), Quaternion.identity);
+                    }
+                    else if (y > heightEdgeGrass)
+                    {
+                        Instantiate(cubeSnow, new Vector3(x, y, z), Quaternion.identity);
+                    }
                 }
             }
         }

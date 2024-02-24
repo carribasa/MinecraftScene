@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
+    public GameObject cube;
+
     void Start()
     {
         if (Physics.Raycast(transform.position, transform.up))
         {
-            GetComponent<Collider>().enabled = false;
-            GetComponent<MeshRenderer>().enabled = false;
+            gameObject.SetActive(false);
         }
     }
 }
