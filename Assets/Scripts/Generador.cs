@@ -8,14 +8,31 @@ public class Generador : MonoBehaviour
     public int width, large, height;
     public int seed;
     public float detail;
-    private int maxHeight = 24;
+    private int maxHeight = 0;
 
     void Start()
     {
+        GeneratePerlingNoise();
         GenerateMap();
     }
 
-    public void GenerateMap()
+    private void GeneratePerlingNoise()
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int z = 0; z < large; z++)
+            {
+                height = (int)(Mathf.PerlinNoise((x / 2 + seed) / detail, (z / 2 + seed) / detail) * detail);
+                if (height > maxHeight)
+                {
+                    maxHeight = height;
+                }
+            }
+        }
+        Debug.Log("MAX HEIGHT -> " + maxHeight);
+    }
+
+    private void GenerateMap()
     {
         for (int x = 0; x < width; x++)
         {
